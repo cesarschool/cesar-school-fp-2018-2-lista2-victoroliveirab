@@ -44,9 +44,35 @@
 # Para a correta execução do programa, a estrutura atual deve ser mantida,
 # substituindo apenas o comando print(questão...) existente.
 ##
+from string import ascii_lowercase
 def main():
-    print("questao 3")
+    #print("questao 3")
+        entrada = input("Digite sua cifra em formato ROT + <chave> + ' ' + 'mensagem'. ")
+    if entrada[:3] != "ROT":
+        print("Erro")
+    else:
+        cifra = int(entrada[3:5])
+        cifrado = ascii_lowercase[cifra:] + ascii_lowercase[:cifra]
+        msg = ''
+        if entrada[5] == " " or entrada[5] == ",":
+            i = 6
+        else:
+            i = 5
+        while i < len(entrada):
+            if entrada[i].isalpha():
+                if entrada[i].isupper():
+                    msg += cifrado[ascii_lowercase.index(entrada[i].lower())].upper()
+                else:
+                    msg += cifrado[ascii_lowercase.index(entrada[i])]
+            else:
+                if entrada[i] in " .,!?":
+                    msg += entrada[i]
+                else:
+                    msg = "Erro"
+                    break
+            i+=1
 
+        print(msg)
 
     
 if __name__ == '__main__':
